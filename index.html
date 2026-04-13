@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Services Hub | Login & Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary-orange: #FF6B00; --soft-white: #FFFFFF; --light-gray: #F4F4F4; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--light-gray); margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .login-card { background: var(--soft-white); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 350px; text-align: center; }
+        .logo { width: 70px; margin-bottom: 10px; }
+        h2 { color: #333; margin-bottom: 20px; font-size: 22px; }
+        .input-group { margin-bottom: 15px; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn { background: var(--primary-orange); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 10px; }
+        .links { margin-top: 15px; font-size: 13px; color: #666; }
+        .links a { color: var(--primary-orange); cursor: pointer; text-decoration: none; font-weight: 600; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+        .popup { background: white; padding: 25px; border-radius: 15px; width: 90%; max-width: 400px; position: relative; max-height: 80vh; overflow-y: auto; }
+        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <img src="https://via.placeholder.com/70/FF6B00/FFFFFF?text=SSH" alt="Logo" class="logo">
+        <h2>SSH లాగిన్</h2>
+        <div class="input-group"><input type="text" id="loginUser" placeholder="User ID / Email"></div>
+        <div class="input-group"><input type="password" id="loginPass" placeholder="Password"></div>
+        <button class="btn" onclick="handleLogin()">Login</button>
+        <div class="links">
+            <a onclick="togglePopup('forgotPopup')">పాస్‌వర్డ్ మర్చిపోయారా?</a><br><br>
+            కొత్తవారా? <a onclick="togglePopup('signupPopup')">Signup చేయండి</a>
+        </div>
+    </div>
+
+    <div class="overlay" id="signupPopup">
+        <div class="popup">
+            <span class="close-btn" onclick="togglePopup('signupPopup')">&times;</span>
+            <h3 style="color: var(--primary-orange);">రిజిస్ట్రేషన్</h3>
+            <form id="signupForm">
+                <div class="input-group"><input type="text" id="regName" placeholder="పూర్తి పేరు" required></div>
+                <div class="input-group"><input type="date" id="regDob" required></div>
+                <div class="input-group"><input type="tel" id="regContact" placeholder="కాంటాక్ట్ నంబర్" required></div>
+                <div class="input-group"><input type="email" id="regEmail" placeholder="ఈమెయిల్" required></div>
+                <div class="input-group">
+                    <select id="regQual" required>
+                        <option value="">బ్రాంచ్ ఎంచుకోండి</option>
+                        <option value="CSE">CSE</option><option value="ECE">ECE</option><option value="EEE">EEE</option><option value="CIVIL">CIVIL</option><option value="MECH">MECH</option>
+                    </select>
+                </div>
+                <div class="input-group"><input type="text" id="regRef" placeholder="రిఫరల్ కోడ్"></div>
+                <div class="input-group"><input type="password" id="regPass" placeholder="పాస్‌వర్డ్ సెట్ చేయండి" required></div>
+                <button type="submit" class="btn">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="overlay" id="forgotPopup">
+        <div class="popup"><span class="close-btn" onclick="togglePopup('forgotPopup')">&times;</span><h3>సహాయం</h3><p>దయచేసి అడ్మిన్‌ను సంప్రదించండి.</p></div>
+    </div>
+
+    <script>
+        // ఇక్కడ మీ Web App URL ని పేస్ట్ చేయండి
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx_29u_vjvU9JjAjmcV6P0MZbMXnQDry9BZehSaufpHMXBPreIdYcHUTpZd6zJtviZPbQ/exec";
+
+        function togglePopup(id) {
+            const el = document.getElementById(id);
+            el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        // SIGNUP LOGIC
+        document.getElementById('signupForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.innerText = "Processing..."; btn.disabled = true;
+
+            const formData = {
+                fullName: document.getElementById('regName').value,
+                dob: document.getElementById('regDob').value,
+                contact: document.getElementById('regContact').value,
+                email: document.getElementById('regEmail').value,
+                qualification: document.getElementById('regQual').value,
+                referralCode: document.getElementById('regRef').value,
+                password: document.getElementById('regPass').value
+            };
+
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(formData) });
+                alert("రిజిస్ట్రేషన్ డేటా పంపబడింది! షీట్ చెక్ చేయండి.");
+                togglePopup('signupPopup');
+                e.target.reset();
+            } catch (err) { alert("Error occurred!"); }
+            btn.innerText = "Register"; btn.disabled = false;
+        };
+
+        // LOGIN LOGIC
+        async function handleLogin() {
+            const u = document.getElementById('loginUser').value;
+            const p = document.getElementById('loginPass').value;
+            if(!u || !p) return alert("వివరాలు నింపండి");
+
+            const btn = document.querySelector('.login-card .btn');
+            btn.innerText = "Verifying..."; btn.disabled = true;
+
+            try {
+                const res = await fetch(`${SCRIPT_URL}?userId=${u}&password=${p}`);
+                const data = await res.json();
+                if(data.result === "success") {
+                    alert("స్వాగతం " + data.userName);
+                    // ఇక్కడ డ్యాష్‌బోర్డ్ పేజీకి వెళ్ళేలా చేయాలి
+                } else { alert("తప్పుడు వివరాలు!"); }
+            } catch (err) { alert("సర్వర్ కనెక్ట్ అవ్వలేదు."); }
+            btn.innerText = "Login"; btn.disabled = false;
+        }
+    </script>
+</body>
+</html>
