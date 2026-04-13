@@ -62,58 +62,64 @@
     </div>
 
     <script>
-        // ఇక్కడ మీ Web App URL ని పేస్ట్ చేయండి
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx_29u_vjvU9JjAjmcV6P0MZbMXnQDry9BZehSaufpHMXBPreIdYcHUTpZd6zJtviZPbQ/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPIC_lU_uLv9rD8JwnpgMYpKS-WNUmHlPPnB--97d345773hBY9l7zR4boHYdGXU3Fpg/exec";
 
-        function togglePopup(id) {
-            const el = document.getElementById(id);
-            el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
-        }
+    function togglePopup(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
+    }
 
-        // SIGNUP LOGIC
-        document.getElementById('signupForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            btn.innerText = "Processing..."; btn.disabled = true;
+    // SIGNUP
+    document.getElementById('signupForm').onsubmit = async (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        btn.innerText = "Processing..."; btn.disabled = true;
 
-            const formData = {
-                fullName: document.getElementById('regName').value,
-                dob: document.getElementById('regDob').value,
-                contact: document.getElementById('regContact').value,
-                email: document.getElementById('regEmail').value,
-                qualification: document.getElementById('regQual').value,
-                referralCode: document.getElementById('regRef').value,
-                password: document.getElementById('regPass').value
-            };
-
-            try {
-                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(formData) });
-                alert("రిజిస్ట్రేషన్ డేటా పంపబడింది! షీట్ చెక్ చేయండి.");
-                togglePopup('signupPopup');
-                e.target.reset();
-            } catch (err) { alert("Error occurred!"); }
-            btn.innerText = "Register"; btn.disabled = false;
+        const formData = {
+            action: "signup",
+            fullName: document.getElementById('regName').value,
+            dob: document.getElementById('regDob').value,
+            contact: document.getElementById('regContact').value,
+            email: document.getElementById('regEmail').value,
+            qualification: document.getElementById('regQual').value,
+            referralCode: document.getElementById('regRef').value,
+            password: document.getElementById('regPass').value
         };
 
-        // LOGIN LOGIC
-        async function handleLogin() {
-            const u = document.getElementById('loginUser').value;
-            const p = document.getElementById('loginPass').value;
-            if(!u || !p) return alert("వివరాలు నింపండి");
+        try {
+            await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(formData) });
+            alert("రిజిస్ట్రేషన్ విజయవంతమైంది!");
+            togglePopup('signupPopup');
+        } catch (err) { alert("Error in Signup!"); }
+        btn.innerText = "Register"; btn.disabled = false;
+    };
 
-            const btn = document.querySelector('.login-card .btn');
-            btn.innerText = "Verifying..."; btn.disabled = true;
+    // LOGIN
+    async function handleLogin() {
+        const u = document.getElementById('loginUser').value;
+        const p = document.getElementById('loginPass').value;
+        if(!u || !p) return alert("వివరాలు నింపండి");
 
-            try {
-                const res = await fetch(`${SCRIPT_URL}?userId=${u}&password=${p}`);
-                const data = await res.json();
-                if(data.result === "success") {
-                    alert("స్వాగతం " + data.userName);
-                    // ఇక్కడ డ్యాష్‌బోర్డ్ పేజీకి వెళ్ళేలా చేయాలి
-                } else { alert("తప్పుడు వివరాలు!"); }
-            } catch (err) { alert("సర్వర్ కనెక్ట్ అవ్వలేదు."); }
-            btn.innerText = "Login"; btn.disabled = false;
+        const btn = document.querySelector('.login-card .btn');
+        btn.innerText = "Verifying..."; btn.disabled = true;
+
+        try {
+            const res = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({ action: "login", userId: u, password: p })
+            });
+            const data = await res.json();
+            if(data.result === "success") {
+                alert("స్వాగతం " + data.userName);
+                // ఇక్కడ dashboard.html కి వెళ్లండి
+            } else { alert("తప్పుడు వివరాలు!"); }
+        } catch (err) { 
+            console.log(err);
+            alert("సర్వర్ సమస్య! మీ URL సరిగ్గా ఉందో లేదో చూడండి."); 
         }
-    </script>
+        btn.innerText = "Login"; btn.disabled = false;
+    }
+</script>
+
 </body>
 </html>
