@@ -3,245 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Micron - Auth Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>MICRON | Professional, Educational & Relief</title>
     <style>
+        /* General Styles */
+        :root {
+            --sky-blue: #87CEEB;
+            --dark-blue: #0077b6;
+            --white: #ffffff;
+            --gray: #f4f4f4;
+        }
+
         body {
-            background-color: #f3f9ff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            font-family: 'Inter', sans-serif;
-            color: #334155;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: var(--white);
         }
-        .header-white {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .illustration-container {
-            flex-shrink: 0;
+
+        /* Header */
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 1rem 0; /* Reduced padding to make room for larger image */
-            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 50px; /* Placeholder for Logo */
+        }
+
+        .nav-btns button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .signup-btn { background: var(--sky-blue); color: white; }
+        .menu-btn { background: var(--gray); color: #333; }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 10%;
+            text-align: center;
+            background: linear-gradient(to bottom, #e0f4ff, #ffffff);
+        }
+
+        .hero h1 { font-size: 2.5rem; color: var(--dark-blue); }
+        .hero p { max-width: 800px; margin: 20px auto; font-size: 1.1rem; }
+
+        .get-started {
+            padding: 15px 40px;
+            background: var(--sky-blue);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* Sections */
+        section { padding: 60px 10%; }
+        .services, .why-choose { background: var(--white); }
+        .mission-vision { display: flex; gap: 40px; background: #f9fdff; }
+        h2 { color: var(--dark-blue); border-left: 5px solid var(--sky-blue); padding-left: 15px; }
+
+        /* Security & Login Section */
+        .auth-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background: var(--gray);
+        }
+
+        .security-illustration img {
             width: 100%;
-       }
+            max-width: 400px;
+        }
 
-       /* Updated image class to be significantly larger */
-       .illustration-container img {
-           width: 85%; /* Uses more horizontal space */
-           max-width: 450px; /* Increased from 240px to 450px */
-           height: auto;
-           max-height: 35vh; /* Prevents it from getting too tall on short screens */
-           object-fit: contain;
-      }
+        .login-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 350px;
+        }
 
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+
+        /* Popups */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center; align-items: center;
+            z-index: 2000;
         }
-        .glass-card {
-            background: #ffffff;
-            box-shadow: 0 15px 50px -12px rgba(0, 0, 0, 0.08);
-            border: 1px solid #f1f5f9;
-            z-index: 10;
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            position: relative;
         }
-        /* Hide scrollbar for clean UI */
-        body::-webkit-scrollbar { display: none; }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer a { color: var(--sky-blue); text-decoration: none; margin: 0 10px; }
     </style>
 </head>
 <body>
 
-    <header class="header-white w-full p-4 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <img src="IMG_20260414_113028.jpg" alt="Micron Logo" class="h-6">
-            <div class="flex items-center gap-4">
-                <button onclick="showForm('signup')" class="border border-gray-300 px-4 py-1 rounded-md text-sm font-medium hover:bg-gray-50 transition">Sign Up</button>
-                <i class="fa-solid fa-bars text-xl text-gray-500 cursor-pointer"></i>
-            </div>
+    <header>
+        <div class="logo">
+            <img src="IMG_20260414_113028.jpg" alt="MICRON LOGO">
+        </div>
+        <div class="nav-btns">
+            <button class="signup-btn" onclick="openModal('signupModal')">Sign Up</button>
+            <button class="menu-btn">Menu</button>
         </div>
     </header>
 
-  <main class="flex-grow flex flex-col items-center">
-        
-        <div class="illustration-container">
-            <img src="Picsart_26-04-14_14-33-25-649.jpg" 
-                 class="w-48 md:w-60 h-auto object-contain" alt="Background Illustration">
+    <section class="hero">
+        <h1>Welcome to MICRON</h1>
+        <p>Where professional excellence meets the future of education. <br>
+           We bridge the gap between rigorous learning and mindful relaxation. <br>
+           Our platform empowers you to build a career and master new skills. <br>
+           Recharge your mind with our integrated gaming modules effortlessly. <br>
+           Innovation is not just what we do; it’s who we are at MICRON.</p>
+        <button class="get-started" onclick="openModal('signupModal')">Get Started</button>
+    </section>
+
+    <section class="services">
+        <h2>Our Specialized Services</h2>
+        <p>MICRON provides a comprehensive suite of digital tools designed for the modern learner and professional. We offer high-end educational resources that cover everything from technical certifications to creative arts, ensuring a well-rounded growth path. Our professional portal allows users to manage their portfolios, connect with industry experts, and track their career progression with real-time analytics. What sets us apart is our integrated 'Relief Zone,' a curated collection of cognitive and casual games designed to reduce stress and improve mental agility during study breaks. We also provide collaborative workspaces where teams can brainstorm and execute projects seamlessly. From secure data management to interactive AI-driven learning paths, MICRON is dedicated to providing an all-in-one solution for personal and professional development in an increasingly digital world.</p>
+    </section>
+
+    <section class="why-choose">
+        <h2>Why Choose Us</h2>
+        <p>Choosing MICRON means choosing a platform that understands the importance of balance in a fast-paced environment. Unlike traditional educational or professional sites that focus solely on productivity, we recognize that mental well-being is the key to long-term success. Our unique architecture allows you to transition from a high-intensity learning module to a relaxing gaming session without ever leaving the dashboard. We utilize state-of-the-art security protocols to ensure your data and progress are always protected. Our community-driven approach ensures that you have access to a network of like-minded individuals and mentors who can guide your journey. Additionally, our referral system rewards growth, making it easier for you to bring your peers along on this transformative experience. With MICRON, you get a scalable, reliable, and innovative partner that grows with you, adapting to your needs.</p>
+    </section>
+
+    <section class="mission-vision">
+        <div>
+            <h3>Our Mission</h3>
+            <p>To democratize access to high-quality professional resources while advocating for mental health through integrated gaming, creating a balanced digital lifestyle for everyone globally.</p>
         </div>
-
-        <div id="auth-card" class="glass-card w-[92%] max-w-[420px] rounded-[2.5rem] p-8 mb-12">
-            
-            <div id="login-form">
-                <div class="text-center mb-8">
-                    <img src="IMG_20260414_113028.jpg" alt="Logo" class="h-5 mx-auto mb-2 opacity-80">
-                    <h1 class="text-2xl font-bold text-slate-800">Welcome Back!</h1>
-                    <p class="text-slate-400 text-sm">Login to your account</p>
-                </div>
-
-                <div class="space-y-4">
-                    <div>
-                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wide ml-1">Email</label>
-                        <div class="relative mt-1">
-                            <span class="absolute inset-y-0 left-4 flex items-center text-slate-400"><i class="fa-regular fa-envelope"></i></span>
-                            <input type="email" placeholder="Enter your email" class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-blue-400 focus:bg-white transition-all">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wide ml-1">Password</label>
-                        <div class="relative mt-1">
-                            <span class="absolute inset-y-0 left-4 flex items-center text-slate-400"><i class="fa-solid fa-lock"></i></span>
-                            <input id="login-pass" type="password" placeholder="Enter your password" class="w-full pl-11 pr-12 py-3.5 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-blue-400 focus:bg-white transition-all">
-                            <span onclick="togglePassword('login-pass', this)" class="absolute inset-y-0 right-4 flex items-center text-slate-400 cursor-pointer">
-                                <i class="fa-regular fa-eye"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <button onclick="handleLogin()" class="w-full bg-[#3b82f6] text-white py-4 rounded-2xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-100">Login</button>
-                </div>
-
-                <div class="mt-8 text-center space-y-4">
-                    <button onclick="showForm('reset')" class="text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center justify-center gap-1 mx-auto transition">
-                        Forgot your password? <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </button>
-                    <p class="text-sm text-slate-400">Don't have an account? <span onclick="showForm('signup')" class="text-blue-600 font-bold cursor-pointer hover:underline">Sign up</span></p>
-                </div>
-            </div>
-
-            <div id="signup-form" class="hidden">
-                <h1 class="text-xl font-bold text-slate-800 mb-6 flex justify-between items-center">
-                    Sign Up <i class="fa-solid fa-xmark text-slate-300 cursor-pointer text-sm" onclick="showForm('login')"></i>
-                </h1>
-                <div class="space-y-3">
-                    <input type="text" placeholder="Full Name" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none">
-                    <input type="text" placeholder="DD/MM/YYYY" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none">
-                    <input type="tel" placeholder="Phone number" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none">
-                    <input type="email" placeholder="Enter your email" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none">
-                    <input type="password" placeholder="Create a password" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none">
-                    <button onclick="handleSignup()" class="w-full bg-blue-600 text-white py-3.5 rounded-xl font-bold mt-4">Create Account</button>
-                </div>
-            </div>
-
-            <div id="success-view" class="hidden text-center py-10">
-                <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
-                    <i class="fa-solid fa-check"></i>
-                </div>
-                <h1 class="text-2xl font-bold text-slate-800 mb-2">Success!</h1>
-                <p class="text-slate-500 text-sm">Successfully Registered</p>
-                <p class="text-slate-400 text-xs mt-4">Redirecting to login...</p>
-            </div>
-
-            <div id="reset-form" class="hidden">
-                <h1 class="text-xl font-bold text-slate-800 text-center mb-1">Reset Your Password</h1>
-                <p class="text-center text-xs text-slate-400 mb-8">Enter details to receive an OTP.</p>
-                <div class="space-y-5">
-                    <input type="email" placeholder="Enter registered email" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none">
-                    <input type="text" placeholder="Enter your User ID" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 outline-none">
-                    
-                    <div class="flex justify-between items-center px-1">
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">OTP <i class="fa-solid fa-circle-check text-green-400"></i></span>
-                        <span id="timer" onclick="handleOTPRequest()" class="text-xs text-slate-400 font-semibold">Resend OTP (59s)</span>
-                    </div>
-
-                    <div class="flex justify-between gap-2">
-                        <input type="text" maxlength="1" class="w-12 h-12 border border-slate-200 rounded-xl text-center text-lg font-bold outline-none focus:border-blue-500 focus:bg-blue-50 transition-all">
-                        <input type="text" maxlength="1" class="w-12 h-12 border border-slate-200 rounded-xl text-center text-lg font-bold outline-none focus:border-blue-500 focus:bg-blue-50 transition-all">
-                        <input type="text" maxlength="1" class="w-12 h-12 border border-slate-200 rounded-xl text-center text-lg font-bold outline-none focus:border-blue-500 focus:bg-blue-50 transition-all">
-                        <span class="flex items-center text-slate-300">-</span>
-                        <input type="text" maxlength="1" class="w-12 h-12 border border-slate-200 rounded-xl text-center text-lg font-bold outline-none focus:border-blue-500 focus:bg-blue-50 transition-all">
-                        <input type="text" maxlength="1" class="w-12 h-12 border border-slate-200 rounded-xl text-center text-lg font-bold outline-none focus:border-blue-500 focus:bg-blue-50 transition-all">
-                        <input type="text" maxlength="1" class="w-12 h-12 border border-slate-200 rounded-xl text-center text-lg font-bold outline-none focus:border-blue-500 focus:bg-blue-50 transition-all">
-                    </div>
-
-                    <button id="otp-btn" onclick="handleOTPRequest()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold transition shadow-lg shadow-blue-50">Request OTP</button>
-                    <p onclick="showForm('login')" class="text-center text-sm text-blue-600 font-semibold cursor-pointer">Back to Login</p>
-                </div>
-            </div>
+        <div>
+            <h3>Our Vision</h3>
+            <p>To become the world’s leading ecosystem where productivity and relaxation coexist, empowering a billion users to achieve their dreams without burning out or fatigue.</p>
         </div>
-    </main>
+    </section>
+
+    <section class="auth-container">
+        <div class="security-illustration">
+            <img src="Picsart_26-04-14_14-33-25-649.jpg" alt="Security Illustration">
+            <p style="text-align:center">Secure OTP via Mobile & Mail</p>
+        </div>
+        <div class="login-form">
+            <h3>Login</h3>
+            <input type="text" placeholder="Email or Username">
+            <input type="password" placeholder="Password">
+            <button class="signup-btn" style="width:100%; margin-top:10px;">Login</button>
+            <p><a href="#" onclick="openModal('forgotModal')">Forgot Password?</a></p>
+            <p>Don't have an account? <a href="#" onclick="openModal('signupModal')">Sign Up</a></p>
+        </div>
+    </section>
+
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <h3>Sign Up</h3>
+            <input type="text" placeholder="Full Name" style="width:100%; margin-bottom:10px;">
+            <input type="date" placeholder="DOB" style="width:100%; margin-bottom:10px;">
+            <input type="email" placeholder="Email" style="width:100%; margin-bottom:10px;">
+            <input type="text" placeholder="Contact" style="width:100%; margin-bottom:10px;">
+            <input type="text" placeholder="Referral Code" style="width:100%; margin-bottom:10px;">
+            <input type="password" placeholder="Password" style="width:100%; margin-bottom:10px;">
+            <button class="signup-btn" onclick="submitSignup()">Submit</button>
+            <button onclick="closeModal('signupModal')">Close</button>
+        </div>
+    </div>
+
+    <div id="forgotModal" class="modal">
+        <div class="modal-content">
+            <h3>Reset Password</h3>
+            <input type="email" placeholder="Registered Email" style="width:100%; margin-bottom:10px;">
+            <input type="text" placeholder="User ID" style="width:100%; margin-bottom:10px;">
+            <input type="text" placeholder="Enter OTP" style="width:100%; margin-bottom:10px;">
+            <button class="signup-btn">Verify</button>
+            <button onclick="closeModal('forgotModal')">Close</button>
+        </div>
+    </div>
+
+    <footer>
+        <p><a href="#">Privacy & Policy</a> | <a href="#">Terms & Conditions</a></p>
+        <p>&copy; 2026 MICRON. All rights reserved.</p>
+    </footer>
 
     <script>
-        let countdown;
-        let isTimerRunning = false;
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         
-        function showForm(type) {
-            document.getElementById('login-form').classList.add('hidden');
-            document.getElementById('signup-form').classList.add('hidden');
-            document.getElementById('reset-form').classList.add('hidden');
-            document.getElementById('success-view').classList.add('hidden');
-            document.getElementById(type + '-form').classList.remove('hidden');
-        }
-
-        function togglePassword(inputId, iconEl) {
-            const input = document.getElementById(inputId);
-            const icon = iconEl.querySelector('i');
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.replace('fa-eye', 'fa-eye-slash');
-            } else {
-                input.type = 'password';
-                icon.classList.replace('fa-eye-slash', 'fa-eye');
-            }
-        }
-
-        function handleSignup() {
-            // In a real app, you'd send data to your backend here
-            showForm('success'); // 'success' isn't a form, so we use logic below
-            document.getElementById('success-view').classList.remove('hidden');
-            
-            // Redirect back to login after 3 seconds
-            setTimeout(() => {
-                showForm('login');
-            }, 3000);
-        }
-
-        function handleLogin() {
-            // Logic to open user dashboard or external window
-            alert("Login Successful! Redirecting to window...");
-            window.location.href = "https://your-dashboard-link.vercel.app"; 
-        }
-
-        function startTimer(seconds) {
-            clearInterval(countdown);
-            isTimerRunning = true;
-            const timerDisplay = document.getElementById('timer');
-            timerDisplay.classList.remove('cursor-pointer', 'text-blue-600', 'underline');
-            timerDisplay.classList.add('text-slate-400');
-            
-            let timeLeft = seconds;
-            timerDisplay.innerText = `Resend OTP (${timeLeft}s)`;
-
-            countdown = setInterval(() => {
-                timeLeft--;
-                timerDisplay.innerText = `Resend OTP (${timeLeft}s)`;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(countdown);
-                    isTimerRunning = false;
-                    timerDisplay.innerText = "Resend OTP Now";
-                    timerDisplay.classList.replace('text-slate-400', 'text-blue-600');
-                    timerDisplay.classList.add('cursor-pointer', 'underline');
-                }
-            }, 1000);
-        }
-
-        function handleOTPRequest() {
-            if (isTimerRunning && event.target.id !== 'otp-btn') return;
-
-            const btn = document.getElementById('otp-btn');
-            const originalText = btn.innerText;
-            btn.innerText = "Sending OTP...";
-            btn.disabled = true;
-            btn.style.opacity = "0.7";
-            
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.disabled = false;
-                btn.style.opacity = "1";
-                startTimer(59); 
-            }, 1200);
+        function submitSignup() {
+            alert("Successfully Registered!");
+            closeModal('signupModal');
         }
     </script>
-    
+</body>
+</html>
