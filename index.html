@@ -3,246 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MICRON | Professional, Educational & Relief</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>MICRON | Professional, Education & Relief</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        /* --- Root & Basic Styles --- */
-        :root {
-            --sky-blue: #87CEEB;
-            --white: #ffffff;
-            --text-dark: #333;
-            --accent-blue: #0077b6;
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%);
+            scroll-behavior: smooth;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        
-        body { background-color: var(--sky-blue); overflow-x: hidden; }
-
-        /* --- Header --- */
-        header {
-            background: var(--white);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .logo { font-size: 24px; font-weight: bold; color: var(--accent-blue); letter-spacing: 2px; }
-
-        .nav-btns button {
-            padding: 8px 15px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-
-        .signup-btn { background: var(--accent-blue); color: white; transition: 0.3s; }
-        .signup-btn:hover { background: #005f92; transform: scale(1.05); }
-        .menu-btn { background: transparent; color: var(--text-dark); font-size: 20px; }
-
-        /* --- Animations --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate { animation: fadeInUp 0.8s ease-out forwards; }
-
-        /* --- Sections Content --- */
-        .container { max-width: 1000px; margin: 40px auto; padding: 20px; }
-
-        section {
+        .glass-card {
             background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
-        h2 { color: var(--accent-blue); margin-bottom: 15px; }
-        p { line-height: 1.6; color: var(--text-dark); text-align: justify; }
-
-        /* --- Forms & Security --- */
-        .auth-container { text-align: center; }
-        .illustration { width: 100%; max-width: 300px; margin-bottom: 20px; }
-        
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .login-card { background: white; padding: 25px; border-radius: 10px; border-bottom: 5px solid var(--accent-blue); }
-
-        /* --- Popups (Modals) --- */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 450px;
-            position: relative;
-        }
-
-        .close-modal { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 20px; }
-
-        /* --- Footer --- */
-        footer {
-            background: var(--white);
-            padding: 40px 5% 20px;
-            text-align: center;
-            border-top: 2px solid var(--sky-blue);
-        }
-
-        .footer-links a { color: var(--accent-blue); text-decoration: none; margin: 0 10px; font-weight: bold; }
-
-        /* --- Mobile Responsiveness --- */
-        @media (max-width: 600px) {
-            header { padding: 10px 3%; }
-            .logo { font-size: 20px; }
-            section { padding: 20px; }
+            z-index: 50;
         }
     </style>
 </head>
-<body>
+<body class="text-gray-800">
 
-    <header>
-        <div class="logo">
-            <img src="IMG_20260414_113028.jpg" alt="Logo" class="Logo"></div>
-        <div class="nav-btns">
-            <button class="signup-btn" onclick="toggleModal('signupModal')">Sign Up</button>
-            <button class="menu-btn"><i class="fas fa-bars"></i></button>
+    <header class="bg-white shadow-md sticky top-0 z-40 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold text-sky-600 tracking-tighter">MICRON</div>
+            <div class="flex gap-3">
+                <button onclick="toggleModal('signupModal')" class="bg-sky-500 text-white px-4 py-1 rounded-full text-sm font-semibold hover:bg-sky-600 transition">Sign Up</button>
+                <button class="text-sky-600 pt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+            </div>
         </div>
     </header>
 
-    <div class="container">
-        <section class="animate">
-            <h2>Welcome to MICRON</h2>
-            <p>Welcome to MICRON—where professional excellence meets the future of education. We bridge the gap between rigorous learning and mindful relaxation through integrated gaming modules. Our platform empowers you to build a career, master new skills, and recharge your mind all in one unified ecosystem. Start your journey today to experience a smarter way to grow and play. Innovation is not just what we do; it’s who we are.</p>
-            <button class="signup-btn" style="margin-top:20px; width:200px; height:45px;" onclick="toggleModal('signupModal')">Get Started</button>
-        </section>
+    <section class="container mx-auto px-6 py-16 text-center animate__animated animate__fadeIn">
+        <h1 class="text-3xl md:text-5xl font-bold mb-6 text-sky-900 leading-tight">
+            Welcome to MICRON—where professional excellence meets the future of education. We bridge the gap between rigorous learning and mindful relaxation through integrated gaming modules. Our platform empowers you to master skills and recharge your mind in one unified ecosystem.
+        </h1>
+        <button onclick="toggleModal('signupModal')" class="bg-sky-600 text-white px-8 py-3 rounded-lg shadow-lg hover:scale-105 transition-transform">Get Started</button>
+    </section>
 
-        <section class="animate">
-            <h2>Our Specialized Services</h2>
-            <p>MICRON provides a comprehensive suite of digital tools designed for the modern learner and professional. We offer high-end educational resources that cover everything from technical certifications to creative arts, ensuring a well-rounded growth path. Our professional portal allows users to manage their portfolios, connect with industry experts, and track their career progression with real-time analytics. What sets us apart is our integrated 'Relief Zone,' a curated collection of cognitive and casual games designed to reduce stress and improve mental agility during study breaks. We also provide collaborative workspaces where teams can brainstorm and execute projects seamlessly. From secure data management to interactive AI-driven learning paths, MICRON is dedicated to providing an all-in-one solution for personal and professional development in an increasingly digital world.</p>
-        </section>
-
-        <section class="animate">
-            <h2>Why Choose MICRON?</h2>
-            <p>Choosing MICRON means choosing a platform that understands the importance of balance in a fast-paced environment. Unlike traditional educational or professional sites that focus solely on productivity, we recognize that mental well-being is the key to long-term success. Our unique architecture allows you to transition from a high-intensity learning module to a relaxing gaming session without ever leaving the dashboard. We utilize state-of-the-art security protocols to ensure your data and progress are always protected. Our community-driven approach ensures that you have access to a network of like-minded individuals and mentors who can guide your journey. Additionally, our referral system rewards growth, making it easier for you to bring your peers along on this transformative experience. With MICRON, you get a scalable, reliable, and innovative partner that grows with you, adapting to your needs whether you are a student, a freelancer, or an established professional.</p>
-        </section>
-
-        <section class="animate">
-            <h2>Mission & Vision</h2>
-            <div style="margin-bottom: 20px;">
-                <strong>Our Mission:</strong>
-                <p>To democratize access to high-quality professional and educational resources while advocating for mental health through integrated gaming and relief tools, creating a balanced digital lifestyle for everyone.</p>
-            </div>
-            <div>
-                <strong>Our Vision:</strong>
-                <p>To become the world’s leading ecosystem where productivity and relaxation coexist, empowering a billion users to achieve their dreams without burning out.</p>
-            </div>
-        </section>
-
-        <section class="auth-container animate">
-            <h2>Secure Access</h2>
-            <img src="Picsart_26-04-14_14-33-25-649.jpg" alt="Security Illustration" class="illustration">
-            
-            <div class="login-card">
-                <h3>Login to Dashboard</h3>
-                <form onsubmit="handleLogin(event)">
-                    <input type="text" placeholder="Email or Username" required>
-                    <input type="password" placeholder="Password" required>
-                    <button type="submit" class="signup-btn" style="width:100%; padding:12px; margin-top:10px;">Login</button>
-                </form>
-                <div style="margin-top:15px; font-size: 14px;">
-                    <a href="#" onclick="toggleModal('forgotModal')" style="color: var(--accent-blue);">Forgot Password?</a><br><br>
-                    Don't have an account? <a href="#" onclick="toggleModal('signupModal')" style="color: var(--accent-blue);">Sign Up</a>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <div id="signupModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="toggleModal('signupModal')">&times;</span>
-            <h2 style="text-align: center;">Join MICRON</h2>
-            <form onsubmit="handleSignup(event)">
-                <input type="text" placeholder="Full Name" required>
-                <input type="date" placeholder="Date of Birth" required>
-                <input type="email" placeholder="Email Address" required>
-                <input type="tel" placeholder="Contact Number" required>
-                <input type="text" placeholder="Referral Code (Optional)">
-                <input type="password" placeholder="Password" required>
-                <button type="submit" class="signup-btn" style="width:100%; padding:12px; margin-top:10px;">Submit</button>
-            </form>
+    <section class="container mx-auto px-6 py-10">
+        <div class="glass-card p-8 rounded-2xl shadow-sm border-l-4 border-sky-500">
+            <h2 class="text-2xl font-bold mb-4 text-sky-700">Our Specialized Services</h2>
+            <p class="leading-relaxed text-justify">
+                MICRON provides a comprehensive suite of digital tools designed for the modern learner and professional. We offer high-end educational resources that cover everything from technical certifications to creative arts, ensuring a well-rounded growth path. Our professional portal allows users to manage their portfolios, connect with industry experts, and track their career progression with real-time analytics. What sets us apart is our integrated 'Relief Zone,' a curated collection of cognitive and casual games designed to reduce stress and improve mental agility during study breaks. We also provide collaborative workspaces where teams can brainstorm and execute projects seamlessly. From secure data management to interactive AI-driven learning paths, MICRON is dedicated to providing an all-in-one solution for personal and professional development in an increasingly digital world.
+            </p>
         </div>
-    </div>
+    </section>
 
-    <div id="forgotModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="toggleModal('forgotModal')">&times;</span>
-            <h2>Reset Password</h2>
-            <input type="email" placeholder="Registered Email" required>
-            <input type="text" placeholder="User ID" required>
-            <input type="text" placeholder="Enter OTP" required>
-            <button class="signup-btn" style="width:100%; padding:12px;">Verify & Reset</button>
+    <section class="container mx-auto px-6 py-10">
+        <div class="glass-card p-8 rounded-2xl shadow-sm border-r-4 border-sky-500">
+            <h2 class="text-2xl font-bold mb-4 text-sky-700">Why Choose Us</h2>
+            <p class="leading-relaxed text-justify">
+                Choosing MICRON means choosing a platform that understands the importance of balance in a fast-paced environment. Unlike traditional educational or professional sites that focus solely on productivity, we recognize that mental well-being is the key to long-term success. Our unique architecture allows you to transition from a high-intensity learning module to a relaxing gaming session without ever leaving the dashboard. We utilize state-of-the-art security protocols to ensure your data and progress are always protected. Our community-driven approach ensures that you have access to a network of like-minded individuals and mentors who can guide your journey. Additionally, our referral system rewards growth, making it easier for you to bring your peers along on this transformative experience. With MICRON, you get a scalable, reliable, and innovative partner that grows with you.
+            </p>
         </div>
-    </div>
+    </section>
 
-    <footer>
-        <div class="footer-links">
-            <a href="#">Privacy & Policy</a> | <a href="#">Terms & Conditions</a>
+    <section class="container mx-auto px-6 py-10 grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+            <h3 class="font-bold text-sky-600 mb-2">Our Mission</h3>
+            <p>To democratize access to high-quality professional and educational resources while advocating for mental health through integrated gaming tools.</p>
         </div>
-        <p style="margin-top: 20px; font-size: 14px;">&copy; 2026 MICRON. All rights reserved.</p>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+            <h3 class="font-bold text-sky-600 mb-2">Our Vision</h3>
+            <p>To become the world’s leading ecosystem where productivity and relaxation coexist, empowering users to achieve dreams without burning out.</p>
+        </div>
+    </section>
+
+    <section class="container mx-auto px-6 py-16 flex flex-col items-center">
+        <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-sky-100">
+            <div class="flex justify-center mb-6">
+                <img src="Picsart_26-04-14_14-33-25-649.jpg" alt="Security" class="w-40 h-40 animate__animated animate__pulse animate__infinite">
+            </div>
+            <h2 class="text-xl font-bold text-center mb-6">Secure Login</h2>
+            <input type="text" placeholder="Email / Username" class="w-full mb-4 p-3 border rounded-lg focus:ring-2 focus:ring-sky-400 outline-none">
+            <input type="password" placeholder="Password" class="w-full mb-4 p-3 border rounded-lg focus:ring-2 focus:ring-sky-400 outline-none">
+            <button class="w-full bg-sky-600 text-white py-3 rounded-lg font-bold mb-4" onclick="alert('Redirecting to Dashboard...')">Login</button>
+            <div class="text-center text-sm space-y-2">
+                <a href="javascript:void(0)" onclick="toggleModal('forgotModal')" class="text-sky-600 block">Forgot Password?</a>
+                <p>Don't have an account? <span class="text-sky-600 font-bold cursor-pointer" onclick="toggleModal('signupModal')">Sign Up</span></p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t py-8 text-center">
+        <div class="space-x-4 mb-4">
+            <a href="#" class="text-gray-500 hover:text-sky-600">Privacy & Policy</a>
+            <span class="text-gray-300">|</span>
+            <a href="#" class="text-gray-500 hover:text-sky-600">Terms & Conditions</a>
+        </div>
+        <p class="text-gray-400 text-sm">© 2026 MICRON. Built for Professionals.</p>
     </footer>
 
+    <div id="signupModal" class="modal flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg p-6 rounded-2xl animate__animated animate__zoomIn">
+            <h2 class="text-2xl font-bold mb-4 text-sky-600">Join MICRON</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" placeholder="Full Name" class="p-2 border rounded">
+                <input type="date" class="p-2 border rounded text-gray-500">
+                <input type="email" placeholder="Email" class="p-2 border rounded">
+                <input type="tel" placeholder="Contact" class="p-2 border rounded">
+                <input type="text" placeholder="Referral Code" class="p-2 border rounded">
+                <input type="password" placeholder="Password" class="p-2 border rounded">
+            </div>
+            <button onclick="submitForm()" class="w-full mt-6 bg-green-500 text-white py-3 rounded-lg font-bold">Submit</button>
+            <button onclick="toggleModal('signupModal')" class="w-full mt-2 text-gray-400">Cancel</button>
+        </div>
+    </div>
+
+    <div id="forgotModal" class="modal flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-sm p-6 rounded-2xl animate__animated animate__fadeInDown">
+            <h2 class="text-xl font-bold mb-4">Reset Password</h2>
+            <input type="email" placeholder="Registered Email" class="w-full mb-3 p-2 border rounded">
+            <input type="text" placeholder="User ID" class="w-full mb-3 p-2 border rounded">
+            <input type="text" placeholder="OTP" class="w-full mb-3 p-2 border rounded">
+            <button onclick="toggleModal('forgotModal')" class="w-full bg-sky-600 text-white py-2 rounded">Verify & Reset</button>
+        </div>
+    </div>
+
     <script>
-        // Toggle Modals
         function toggleModal(id) {
             const modal = document.getElementById(id);
             modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
         }
 
-        // Handle Signup
-        function handleSignup(e) {
-            e.preventDefault();
-            alert("Successfully Registered!");
+        function submitForm() {
+            alert('Successfully Registered!');
             toggleModal('signupModal');
-            // Logic to go back to login (scrolling to login section)
-            document.querySelector('.auth-container').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Handle Login
-        function handleLogin(e) {
-            e.preventDefault();
-            alert("Redirecting to your Dashboard...");
-            // Here you can use window.location.href = 'dashboard.html';
-        }
-
-        // Close modal if user clicks outside
-        window.onclick = function(event) {
-            if (event.target.className === 'modal') {
-                event.target.style.display = "none";
-            }
         }
     </script>
 </body>
