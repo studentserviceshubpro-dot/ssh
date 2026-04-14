@@ -3,37 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Micron - Auth Interface</title>
+    <title>Micron - Auth Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            background: linear-gradient(135deg, #eef2ff 0%, #ffffff 100%);
+            background-color: #f0f7ff;
             min-height: 100vh;
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        /* Fixed Background Illustration */
+        .bg-illustration {
+            position: fixed;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            opacity: 0.8;
+            z-index: 0;
+            pointer-events: none;
         }
         .glass-card {
             background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            position: relative;
+            z-index: 10;
+        }
+        .header-white {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
     </style>
 </head>
 <body class="flex flex-col">
 
-    <header class="w-full p-4 flex justify-between items-center max-w-7xl mx-auto">
-        <img src="IMG_20260414_113028.jpg" alt="Micron Logo" class="h-6">
-        <div class="flex items-center gap-4">
-            <button onclick="showForm('signup')" class="border border-gray-300 px-4 py-1 rounded text-sm font-medium hover:bg-gray-50">Sign Up</button>
-            <i class="fa-solid fa-bars text-xl text-gray-600 cursor-pointer"></i>
+    <header class="header-white w-full p-4 flex justify-between items-center sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+            <img src="IMG_20260414_113028.jpg" alt="Micron Logo" class="h-6">
+            <div class="flex items-center gap-4">
+                <button onclick="showForm('signup')" class="border border-gray-300 px-4 py-1 rounded text-sm font-medium hover:bg-gray-50 transition">Sign Up</button>
+                <i class="fa-solid fa-bars text-xl text-gray-600 cursor-pointer"></i>
+            </div>
         </div>
     </header>
 
-    <main class="flex-grow flex flex-col items-center justify-center px-4 py-6 relative">
-        <div class="mb-8">
-            <img src="IMG_20260414_121839.jpg" alt="Illustration" class="w-56">
-        </div>
+    <img src="IMG_20260414_121839.jpg" class="bg-illustration" alt="background">
 
-        <div id="auth-card" class="glass-card w-full max-w-md rounded-3xl p-8 transition-all duration-300">
+    <main class="flex-grow flex flex-col items-center justify-center px-4 py-20">
+        
+        <div id="auth-card" class="glass-card w-full max-w-md rounded-3xl p-8">
             
             <div id="login-form">
                 <div class="text-center mb-8">
@@ -55,7 +74,7 @@
                         <div class="relative mt-1">
                             <span class="absolute inset-y-0 left-3 flex items-center text-gray-400"><i class="fa-solid fa-lock"></i></span>
                             <input id="login-pass" type="password" placeholder="Enter your password" class="w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 outline-none focus:border-blue-400">
-                            <span onclick="togglePassword('login-pass', this)" class="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                            <span onclick="togglePassword('login-pass', this)" class="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer p-1">
                                 <i class="fa-regular fa-eye"></i>
                             </span>
                         </div>
@@ -93,7 +112,7 @@
                     
                     <div class="flex justify-between items-center px-1">
                         <span class="text-xs font-bold text-gray-500 flex items-center gap-1">OTP <i class="fa-solid fa-circle-check text-green-500"></i></span>
-                        <span id="timer" class="text-xs text-blue-600 font-medium">Resend OTP (59s)</span>
+                        <span id="timer" onclick="handleOTPRequest()" class="text-xs text-gray-400 font-medium">Resend OTP (59s)</span>
                     </div>
 
                     <div class="flex justify-between gap-2">
@@ -113,7 +132,7 @@
         </div>
     </main>
 
-    <footer class="w-full py-6 text-center text-xs text-gray-400">
+    <footer class="w-full py-6 text-center text-xs text-gray-400 relative z-10 bg-white md:bg-transparent">
         <div class="flex justify-center gap-4 mb-2">
             <a href="#" class="hover:underline">Privacy Policy</a>
             <span>|</span>
@@ -124,26 +143,18 @@
 
     <script>
         let countdown;
+        let isTimerRunning = false;
         
-        // Form Switching Logic
         function showForm(type) {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('signup-form').classList.add('hidden');
             document.getElementById('reset-form').classList.add('hidden');
             document.getElementById(type + '-form').classList.remove('hidden');
-
-            if (type === 'reset') {
-                startTimer(59);
-            } else {
-                clearInterval(countdown);
-            }
         }
 
-        // Password Visibility Toggle
         function togglePassword(inputId, iconEl) {
             const input = document.getElementById(inputId);
             const icon = iconEl.querySelector('i');
-            
             if (input.type === 'password') {
                 input.type = 'text';
                 icon.classList.replace('fa-eye', 'fa-eye-slash');
@@ -153,11 +164,15 @@
             }
         }
 
-        // OTP Timer Activation
         function startTimer(seconds) {
             clearInterval(countdown);
+            isTimerRunning = true;
             const timerDisplay = document.getElementById('timer');
+            timerDisplay.classList.remove('cursor-pointer', 'text-blue-600', 'underline');
+            timerDisplay.classList.add('text-gray-400');
+            
             let timeLeft = seconds;
+            timerDisplay.innerText = `Resend OTP (${timeLeft}s)`;
 
             countdown = setInterval(() => {
                 timeLeft--;
@@ -165,23 +180,30 @@
                 
                 if (timeLeft <= 0) {
                     clearInterval(countdown);
+                    isTimerRunning = false;
                     timerDisplay.innerText = "Resend OTP Now";
+                    timerDisplay.classList.replace('text-gray-400', 'text-blue-600');
                     timerDisplay.classList.add('cursor-pointer', 'underline');
                 }
             }, 1000);
         }
 
-        // OTP Button Logic
         function handleOTPRequest() {
+            // Prevent clicking if timer is already running (for the resend link)
+            if (isTimerRunning && event.target.id !== 'otp-btn') return;
+
             const btn = document.getElementById('otp-btn');
             btn.innerText = "Sending...";
-            btn.classList.add('opacity-70', 'cursor-not-allowed');
+            btn.disabled = true;
+            btn.classList.add('opacity-70');
             
             setTimeout(() => {
-                btn.innerText = "OTP Sent!";
-                btn.classList.replace('bg-blue-600', 'bg-green-500');
-                startTimer(59); // Restart timer on click
-            }, 1500);
+                btn.innerText = "Request OTP";
+                btn.disabled = false;
+                btn.classList.remove('opacity-70');
+                // Start the 59s timer ONLY after clicking the buttons
+                startTimer(59); 
+            }, 1000);
         }
     </script>
 </body>
