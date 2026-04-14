@@ -3,146 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Micron</title>
+    <title>Micron - Welcome Back</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #EBF4FF; }
-        .form-card { 
-            border-radius: 40px 40px 0 0; 
-            box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.05);
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
         }
-        .input-field {
-            border: 1px solid #E5E7EB;
-            border-radius: 12px;
-            transition: all 0.2s;
-        }
-        .input-field:focus-within {
-            border-color: #2563EB;
-            box-shadow: 0 0 0 1px #2563EB;
-        }
-        .btn-primary {
-            background-color: #2563EB;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="flex flex-col">
 
-    <header class="flex justify-between items-center px-6 py-4 bg-transparent w-full max-w-md mx-auto">
-        <div class="flex items-center gap-2">
-            <div class="w-10 h-10 flex items-center justify-center">
-                <img src="https://img.icons8.com/color/96/m-key.png" alt="Micron Logo" class="w-full">
-            </div>
-            <span class="font-bold text-[#1E3A8A] text-xl tracking-tight">LOGO</span>
-        </div>
+    <header class="w-full p-4 flex justify-between items-center bg-transparent max-w-7xl mx-auto">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Micron_Technology_logo.svg/1200px-Micron_Technology_logo.svg.png" alt="Micron Logo" class="h-8">
         <div class="flex items-center gap-4">
-            <button onclick="switchForm('signup')" class="border-2 border-[#2563EB] text-[#2563EB] px-5 py-1.5 rounded-xl text-sm font-bold bg-[#EBF4FF] hover:bg-blue-100 transition">Sign Up</button>
-            <div class="flex flex-col gap-1 cursor-pointer">
-                <div class="w-7 h-1 bg-[#4B5563] rounded-full"></div>
-                <div class="w-7 h-1 bg-[#4B5563] rounded-full"></div>
-                <div class="w-7 h-1 bg-[#4B5563] rounded-full"></div>
-            </div>
+            <button onclick="showForm('signup')" class="border border-gray-300 px-4 py-1 rounded text-sm font-medium hover:bg-gray-50">Sign Up</button>
+            <i class="fa-solid fa-bars text-xl text-gray-600 cursor-pointer"></i>
         </div>
     </header>
 
-    <main class="flex-grow flex flex-col max-w-md mx-auto w-full">
+    <main class="flex-grow flex flex-col items-center justify-center px-4 py-10 relative">
         
-        <div class="px-8 py-6 flex justify-center">
-            <img src="https://cdni.iconscout.com/illustration/premium/thumb/otp-verification-illustration-download-in-svg-png-gif-file-formats--one-time-password-security-account-pack-safety-illustrations-5309322.png" 
-                 alt="Illustration" class="w-full max-w-[280px] drop-shadow-xl">
+        <div class="mb-6 relative">
+            <div class="w-48 h-48 bg-blue-100 rounded-full absolute top-0 left-1/2 -translate-x-1/2 blur-3xl opacity-50 -z-10"></div>
+            <img src="https://cdni.iconscout.com/illustration/premium/thumb/online-registration-8631168-6878696.png" alt="Illustration" class="w-64">
         </div>
 
-        <div class="form-card bg-white flex-grow p-8 flex flex-col">
+        <div id="auth-card" class="glass-card w-full max-w-md rounded-3xl p-8 transition-all duration-300">
             
-            <div id="login-section">
+            <div id="login-form">
                 <div class="text-center mb-8">
-                    <div class="inline-block p-3 rounded-full bg-[#EBF4FF] mb-2">
-                        <img src="https://img.icons8.com/fluency/48/globe.png" class="w-10 h-10">
-                    </div>
-                    <p class="text-[#1E3A8A] font-bold uppercase tracking-wider mb-4">Logo</p>
-                    <h1 class="text-3xl font-bold text-[#1F2937] mb-1">Welcome Back!</h1>
-                    <p class="text-gray-400 font-medium">Login to your account</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Micron_Technology_logo.svg/1200px-Micron_Technology_logo.svg.png" alt="Logo" class="h-6 mx-auto mb-2">
+                    <h1 class="text-2xl font-bold text-gray-800">Welcome Back!</h1>
+                    <p class="text-gray-500 text-sm">Login to your account</p>
                 </div>
 
-                <div class="space-y-5">
-                    <div>
-                        <label class="block text-sm font-bold text-[#4B5563] mb-2 ml-1">Email</label>
-                        <div class="input-field flex items-center px-4 py-3.5 bg-white">
-                            <span class="mr-3">📧</span>
-                            <input type="email" placeholder="Enter your email" class="w-full outline-none text-gray-600 placeholder-gray-300">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-[#4B5563] mb-2 ml-1">Password</label>
-                        <div class="input-field flex items-center px-4 py-3.5 bg-white">
-                            <span class="mr-3">🔒</span>
-                            <input type="password" placeholder="Enter your password" class="w-full outline-none text-gray-600 placeholder-gray-300">
-                            <span class="ml-2 cursor-pointer">👁️</span>
-                        </div>
-                    </div>
-                    
-                    <button class="w-full btn-primary text-white font-bold py-4 text-lg hover:bg-blue-700 transition-all mt-4">Login</button>
-                    
-                    <div class="text-center mt-6">
-                        <button onclick="switchForm('forgot')" class="text-[#4B5563] font-semibold hover:text-blue-600">Forgot your password? <span class="text-blue-500">→</span></button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="signup-section" class="hidden">
-                <h2 class="text-2xl font-bold text-[#1E3A8A] mb-6">Sign Up to Get Started</h2>
-                <div class="space-y-3 overflow-y-auto max-h-[400px] pr-2">
-                    <input type="text" placeholder="Full Name" class="w-full input-field px-4 py-3 outline-none">
-                    <input type="text" placeholder="DD/MM/YYYY" class="w-full input-field px-4 py-3 outline-none">
-                    <input type="tel" placeholder="Phone Number" class="w-full input-field px-4 py-3 outline-none">
-                    <input type="email" placeholder="Email Address" class="w-full input-field px-4 py-3 outline-none">
-                    <input type="text" placeholder="Referral Code (Optional)" class="w-full input-field px-4 py-3 outline-none">
-                    <input type="password" placeholder="Create Password" class="w-full input-field px-4 py-3 outline-none">
-                    <button class="w-full btn-primary text-white font-bold py-4 mt-2">Create Account</button>
-                    <button onclick="switchForm('login')" class="w-full text-sm text-gray-500 py-2">Back to Login</button>
-                </div>
-            </div>
-
-            <div id="forgot-section" class="hidden text-center">
-                <h2 class="text-2xl font-bold text-[#1E3A8A] mb-2">Reset Your Password</h2>
-                <p class="text-sm text-gray-400 mb-6">Enter your details to receive an OTP</p>
                 <div class="space-y-4">
-                    <input type="email" placeholder="Registered Email" class="w-full input-field px-4 py-3 outline-none">
-                    <input type="text" placeholder="User ID" class="w-full input-field px-4 py-3 outline-none">
-                    <div class="flex justify-between text-xs font-bold text-gray-500 px-1">
-                        <span>OTP</span>
-                        <span class="text-blue-400">Resend OTP (59s)</span>
+                    <div>
+                        <label class="text-sm font-semibold text-gray-700">Email</label>
+                        <div class="relative mt-1">
+                            <span class="absolute inset-y-0 left-3 flex items-center text-gray-400"><i class="fa-regular fa-envelope"></i></span>
+                            <input type="email" placeholder="Enter your email" class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-400 outline-none">
+                        </div>
                     </div>
-                    <div class="flex justify-between gap-2">
-                        <input type="text" maxlength="1" class="w-12 h-12 border rounded-lg text-center font-bold text-xl outline-none border-blue-200">
-                        <input type="text" maxlength="1" class="w-12 h-12 border rounded-lg text-center font-bold text-xl outline-none border-blue-200">
-                        <input type="text" maxlength="1" class="w-12 h-12 border rounded-lg text-center font-bold text-xl outline-none border-blue-200">
-                        <input type="text" maxlength="1" class="w-12 h-12 border rounded-lg text-center font-bold text-xl outline-none border-blue-200">
+                    <div>
+                        <label class="text-sm font-semibold text-gray-700">Password</label>
+                        <div class="relative mt-1">
+                            <span class="absolute inset-y-0 left-3 flex items-center text-gray-400"><i class="fa-solid fa-lock"></i></span>
+                            <input type="password" placeholder="Enter your password" class="w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-400 outline-none">
+                            <span class="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer"><i class="fa-regular fa-eye"></i></span>
+                        </div>
                     </div>
-                    <button class="w-full btn-primary text-white font-bold py-4">Request OTP</button>
-                    <button onclick="switchForm('login')" class="w-full text-sm text-gray-500">Cancel</button>
+                    <button class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200">Login</button>
+                </div>
+
+                <div class="mt-6 text-center space-y-4">
+                    <button onclick="showForm('reset')" class="text-sm text-gray-600 hover:text-blue-600 flex items-center justify-center gap-1 mx-auto">
+                        Forgot your password? <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                    <p class="text-sm text-gray-500">Don't have an account? <span onclick="showForm('signup')" class="text-blue-600 font-bold cursor-pointer">Sign up</span></p>
                 </div>
             </div>
 
-            <div class="mt-auto pt-8 border-t border-gray-100 text-center">
-                <div class="flex justify-center gap-4 text-xs font-bold text-[#1E3A8A] mb-2">
-                    <a href="#">Privacy Policy</a>
-                    <span class="text-gray-300">|</span>
-                    <a href="#">Terms & Conditions</a>
+            <div id="signup-form" class="hidden">
+                <h1 class="text-2xl font-bold text-gray-800 text-center mb-6 border-b pb-4">Sign Up to Get Started</h1>
+                <div class="space-y-4">
+                    <input type="text" placeholder="Full Name" class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-400 outline-none">
+                    <input type="text" placeholder="DD/MM/YYYY" class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-400 outline-none">
+                    <input type="tel" placeholder="Phone number" class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-400 outline-none">
+                    <input type="email" placeholder="Enter your email" class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-400 outline-none">
+                    <input type="text" placeholder="Referral Code (Optional)" class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-400 outline-none">
+                    <input type="password" placeholder="Create a password" class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-400 outline-none">
+                    <button class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">Create Account</button>
+                    <p onclick="showForm('login')" class="text-center text-sm text-blue-600 cursor-pointer font-medium mt-2">Back to Login</p>
                 </div>
-                <p class="text-[10px] text-gray-400 font-medium">© 2024 YourWebsite. All rights reserved.</p>
             </div>
+
+            <div id="reset-form" class="hidden">
+                <h1 class="text-2xl font-bold text-gray-800 text-center">Reset Your Password</h1>
+                <p class="text-center text-sm text-gray-500 mb-6">Enter your details to receive an OTP.</p>
+                <div class="space-y-4">
+                    <input type="email" placeholder="Enter registered email" class="w-full px-4 py-2 rounded-lg border border-gray-200 outline-none">
+                    <input type="text" placeholder="Enter your User ID" class="w-full px-4 py-2 rounded-lg border border-gray-200 outline-none">
+                    <div class="flex justify-between items-center px-1">
+                        <span class="text-xs font-bold text-gray-400">OTP <i class="fa-solid fa-circle-check"></i></span>
+                        <span class="text-xs text-gray-400">Resend OTP (59s)</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="text" class="w-10 h-10 border rounded text-center" maxlength="1">
+                        <input type="text" class="w-10 h-10 border rounded text-center" maxlength="1">
+                        <input type="text" class="w-10 h-10 border rounded text-center" maxlength="1">
+                        <span class="flex items-center">-</span>
+                        <input type="text" class="w-10 h-10 border rounded text-center" maxlength="1">
+                        <input type="text" class="w-10 h-10 border rounded text-center" maxlength="1">
+                        <input type="text" class="w-10 h-10 border rounded text-center" maxlength="1">
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">Request OTP</button>
+                    <p onclick="showForm('login')" class="text-center text-sm text-blue-600 cursor-pointer font-medium">Back to Login</p>
+                </div>
+            </div>
+
         </div>
     </main>
 
+    <footer class="w-full py-6 text-center text-xs text-gray-400">
+        <div class="flex justify-center gap-4 mb-2">
+            <a href="#" class="hover:underline">Privacy Policy</a>
+            <span>|</span>
+            <a href="#" class="hover:underline">Terms of Service</a>
+        </div>
+        <p>&copy; 2024 YourWebsite. All rights reserved.</p>
+    </footer>
+
     <script>
-        function switchForm(view) {
-            document.getElementById('login-section').classList.add('hidden');
-            document.getElementById('signup-section').classList.add('hidden');
-            document.getElementById('forgot-section').classList.add('hidden');
-            document.getElementById(view + '-section').classList.remove('hidden');
+        function showForm(type) {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('signup-form').classList.add('hidden');
+            document.getElementById('reset-form').classList.add('hidden');
+            
+            document.getElementById(type + '-form').classList.remove('hidden');
         }
     </script>
 </body>
