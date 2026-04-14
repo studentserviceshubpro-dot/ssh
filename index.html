@@ -24,8 +24,20 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2rem 0;
+            padding: 1rem 0; /* Reduced padding to make room for larger image */
             animation: float 6s ease-in-out infinite;
+            width: 100%;
+       }
+
+       /* Updated image class to be significantly larger */
+       .illustration-container img {
+           width: 85%; /* Uses more horizontal space */
+           max-width: 450px; /* Increased from 240px to 450px */
+           height: auto;
+           max-height: 35vh; /* Prevents it from getting too tall on short screens */
+           object-fit: contain;
+      }
+
         }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
