@@ -64,7 +64,42 @@
             cursor: pointer;
         }
 
-        
+        /* --- Flash News --- */
+        .flash-news {
+            width: 92%;
+            margin: 15px auto;
+            height: 160px;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .news-slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            animation: slide 15s infinite;
+        }
+
+        .slide {
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        @keyframes slide {
+            0%, 30% { transform: translateX(0); }
+            33%, 63% { transform: translateX(-100%); }
+            66%, 96% { transform: translateX(-200%); }
+            100% { transform: translateX(0); }
+        }
 
         /* --- UPDATED: 3 Separate Stat Cards --- */
         .stats-grid {
@@ -191,69 +226,12 @@
     <div class="animate-section">
         <h2 class="welcome">Welcome back! 👋</h2>
 
-        <div class="flash-news-container">
-    <div class="news-track">
-        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500')">Event: Tech 2026</div>
-        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500')">Cybersecurity Hub</div>
-        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500')">New AI Training</div>
-        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500')">Event: Tech 2026</div>
-    </div>
-</div>
-
-<style>
-    .flash-news-container {
-        width: 92%;
-        margin: 15px auto;
-        height: 160px;
-        background: #fff;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-
-    .news-track {
-        display: flex;
-        width: 400%; /* 4 slides total (3 original + 1 duplicate) */
-        height: 100%;
-        animation: infiniteScroll 12s linear infinite;
-    }
-
-    .slide {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: flex-end;
-        padding: 20px;
-        background-size: cover;
-        background-position: center;
-        color: white;
-        font-size: 18px;
-        font-weight: bold;
-        flex-shrink: 0;
-    }
-
-    /* Seamless Loop Animation */
-    @keyframes infiniteScroll {
-        0% {
-            transform: translateX(0);
-        }
-        /* Each 25% represents one slide */
-        20% { transform: translateX(0); }       /* Pause on Slide 1 */
-        25% { transform: translateX(-100%); }  /* Move to Slide 2 */
-        45% { transform: translateX(-100%); }  /* Pause on Slide 2 */
-        50% { transform: translateX(-200%); }  /* Move to Slide 3 */
-        70% { transform: translateX(-200%); }  /* Pause on Slide 3 */
-        75% { transform: translateX(-300%); }  /* Move to Duplicate of Slide 1 */
-        95% { transform: translateX(-300%); }  /* Pause on Duplicate */
-        100% { transform: translateX(-300%); } /* Instantly resets to 0% */
-    }
-
-    /* Optional: Pause scrolling when user touches/hovers */
-    .flash-news-container:hover .news-track {
-        animation-play-state: paused;
-    }
-</style>
-
+        <div class="flash-news">
+            <div class="news-slider">
+                <div class="slide" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500')">Event: Tech 2026</div>
+                <div class="slide" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500')">Cybersecurity Hub</div>
+                <div class="slide" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500')">New Earnings Portal</div>
+            </div>
         </div>
 
         <div class="stats-grid">
@@ -273,9 +251,9 @@
 
         <div class="main-btns">
             <a href="#" class="btn-large"><i class="fas fa-book-open"></i> Courses</a>
-            <a href="games.html" class="btn-large"><i class="fas fa-gamepad"></i> Games</a>
+            <a href="game.html" class="btn-large"><i class="fas fa-gamepad"></i> Games</a>
             <a href="ai.resume.html" class="btn-large"><i class="fas fa-file-invoice"></i> AI Resume</a>
-            <a href="guidance.html" class="btn-large"><i class="fas fa-rocket"></i> Guidance</a>
+            <a href="career.guide.html" class="btn-large"><i class="fas fa-rocket"></i> Guidance</a>
         </div>
 
         <div class="small-btns-grid">
@@ -289,63 +267,9 @@
         </div>
     </div>
 
-    <div class="chat-container">
-    <div class="chat-bubble">
-        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-        </svg>
+    <div class="chat-float">
+        <i class="fas fa-comment-dots"></i>
     </div>
-</div>
-
-<style>
-    /* --- Skill India Style Chat Icon --- */
-    .chat-container {
-        position: fixed;
-        bottom: 85px; /* Positioned above the footer */
-        right: 20px;
-        z-index: 9999;
-    }
-
-    .chat-bubble {
-        width: 60px;
-        height: 60px;
-        background-color: #ffffff;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-        cursor: pointer;
-        transition: transform 0.2s ease;
-        border: 1px solid #f0f0f0;
-        position: relative;
-    }
-
-    /* Small tail of the bubble to match the image style */
-    .chat-bubble::after {
-        content: "";
-        position: absolute;
-        bottom: -2px;
-        right: 5px;
-        width: 15px;
-        height: 15px;
-        background: white;
-        border-right: 1px solid #f0f0f0;
-        border-bottom: 1px solid #f0f0f0;
-        transform: rotate(45deg);
-        border-radius: 2px;
-    }
-
-    .chat-bubble:active {
-        transform: scale(0.9);
-    }
-
-    .chat-bubble svg {
-        position: relative;
-        z-index: 2;
-    }
-</style>
-
 
     <footer>
         <p>©2026 Micron | All Rights Reserved</p>
@@ -354,4 +278,3 @@
 
 </body>
 </html>
-        
