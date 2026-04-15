@@ -11,204 +11,249 @@
             --deep-blue: #0ea5e9;
             --white: #ffffff;
             --text-dark: #333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
             background: linear-gradient(135deg, var(--sky-blue) 0%, var(--white) 100%);
             color: var(--text-dark);
             min-height: 100vh;
+            padding-bottom: 80px; /* Space for footer */
         }
 
         /* --- Animations --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .animate-up {
-            animation: fadeIn 0.8s ease forwards;
+        .animate-section {
+            animation: fadeInUp 0.6s ease forwards;
         }
 
         /* --- Header --- */
         header {
             background-color: var(--white);
-            padding: 15px 5%;
+            padding: 12px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
         .logo {
-            font-weight: bold;
-            font-size: 24px;
+            font-weight: 800;
+            font-size: 22px;
             color: var(--deep-blue);
+            letter-spacing: 1px;
         }
 
-        .header-icons {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .profile-icon {
-            font-size: 24px;
+        .header-btn {
+            font-size: 22px;
+            color: #444;
             cursor: pointer;
         }
 
-        /* --- Flash News Scroll --- */
+        /* --- Flash News --- */
         .flash-news {
-            width: 90%;
-            margin: 20px auto;
-            height: 150px;
+            width: 92%;
+            margin: 15px auto;
+            height: 160px;
             background: #fff;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
         }
 
         .news-slider {
             display: flex;
             width: 300%;
             height: 100%;
-            animation: slide 30s infinite;
+            animation: slide 15s infinite;
         }
 
         .slide {
             width: 100%;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: flex-end;
+            padding: 20px;
             background-size: cover;
             background-position: center;
             color: white;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         @keyframes slide {
-            0% { transform: translateX(0); }
-            33% { transform: translateX(-100%); }
-            66% { transform: translateX(-200%); }
+            0%, 30% { transform: translateX(0); }
+            33%, 63% { transform: translateX(-100%); }
+            66%, 96% { transform: translateX(-200%); }
             100% { transform: translateX(0); }
         }
 
-        /* --- Stats Container --- */
-        .stats-container {
-            display: flex;
-            justify-content: space-around;
-            background: white;
-            padding: 20px;
-            margin: 20px 5%;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        /* --- UPDATED: 3 Separate Stat Cards --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 0 4%;
+            margin: 15px 0;
         }
 
-        .stat-item { text-align: center; }
-        .stat-item h3 { color: var(--deep-blue); }
+        .stat-card {
+            background: var(--white);
+            padding: 15px 5px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
 
-        /* --- Main Action Buttons --- */
+        .stat-card h3 {
+            color: var(--deep-blue);
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .stat-card p {
+            font-size: 11px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* --- Main & Small Buttons --- */
         .main-btns {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 0 5%;
-            margin-bottom: 25px;
+            gap: 12px;
+            padding: 0 4%;
         }
 
         .btn-large {
             background: var(--white);
-            padding: 20px;
-            border-radius: 15px;
+            padding: 22px;
+            border-radius: 18px;
             text-align: center;
             text-decoration: none;
             color: var(--text-dark);
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+            font-weight: 700;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
 
-        .btn-large:hover { transform: scale(1.05); background: var(--deep-blue); color: white; }
+        .btn-large i { font-size: 24px; color: var(--deep-blue); }
 
-        /* --- Small Buttons Grid --- */
         .small-btns-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            padding: 0 5%;
-            margin-bottom: 50px;
+            gap: 8px;
+            padding: 15px 4%;
         }
 
         .small-btn {
             background: white;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 12px 5px;
+            border-radius: 12px;
             text-align: center;
-            font-size: 12px;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-size: 11px;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
         }
+
+        .small-btn i { margin-bottom: 5px; color: #444; }
+
+        /* --- Floating Chat Button --- */
+        .chat-float {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 999;
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .chat-float i {
+            font-size: 24px;
+            color: #f97316; /* Orange color for the icon */
+        }
+
+        .chat-float:active { transform: scale(0.9); }
 
         /* --- Footer --- */
         footer {
             background-color: var(--white);
             padding: 20px;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
             border-top: 1px solid #eee;
+            width: 100%;
         }
 
-        .footer-links { margin-top: 10px; }
-        .footer-links a { margin: 0 10px; text-decoration: none; color: gray; }
-
-        .welcome { padding: 20px 5%; font-size: 22px; }
+        .welcome { padding: 15px 5% 5px; font-size: 20px; }
 
     </style>
 </head>
 <body>
 
     <header>
-        <i class="fas fa-bars profile-icon"></i>
+        <i class="fas fa-bars header-btn"></i>
         <div class="logo">MICRON</div>
-        <div class="header-icons">
-            <i class="fas fa-user-circle profile-icon"></i>
-        </div>
+        <i class="fas fa-user-circle header-btn"></i>
     </header>
 
-    <div class="animate-up">
-        <h2 class="welcome">Welcome back, User! 👋</h2>
+    <div class="animate-section">
+        <h2 class="welcome">Welcome back! 👋</h2>
 
         <div class="flash-news">
             <div class="news-slider">
-                <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80')">New AI Courses Launched</div>
-                <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80')">Hiring Event: Tech 2026</div>
-                <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80')">Cybersecurity Challenge Open</div>
+                <div class="slide" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500')">Event: Tech 2026</div>
+                <div class="slide" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500')">Cybersecurity Hub</div>
+                <div class="slide" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500')">New Earnings Portal</div>
             </div>
         </div>
 
-        <div class="stats-container">
-            <div class="stat-item"><h3>12</h3><p>Courses accepted</p></div>
-            <div class="stat-item"><h3>₹450</h3><p>Earnings</p></div>
-            <div class="stat-item"><h3>5</h3><p>Certificates</p></div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>12</h3>
+                <p>Courses accepted</p>
+            </div>
+            <div class="stat-card">
+                <h3>₹450</h3>
+                <p>Earnings</p>
+            </div>
+            <div class="stat-card">
+                <h3>5</h3>
+                <p>Certificates</p>
+            </div>
         </div>
 
         <div class="main-btns">
-            <a href="#" class="btn-large">📘 Courses</a>
-            <a href="games.html" class="btn-large">🎮 Games</a>
-            <a href="ai.resume.html" class="btn-large">📄 AI Resume</a>
-            <a href="guidance.html" class="btn-large">🚀 Guidance</a>
+            <a href="#" class="btn-large"><i class="fas fa-book-open"></i> Courses</a>
+            <a href="games.html" class="btn-large"><i class="fas fa-gamepad"></i> Games</a>
+            <a href="ai.resume.html" class="btn-large"><i class="fas fa-file-invoice"></i> AI Resume</a>
+            <a href="guidance.html" class="btn-large"><i class="fas fa-rocket"></i> Guidance</a>
         </div>
 
         <div class="small-btns-grid">
@@ -222,12 +267,15 @@
         </div>
     </div>
 
+    <div class="chat-float">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
     <footer>
         <p>©2026 Micron | All Rights Reserved</p>
-        <div class="footer-links">
-            <a href="#">Privacy & Policy</a> | <a href="#">Terms & Conditions</a>
-        </div>
+        <p style="color: gray; margin-top: 5px;">Privacy & Policy | Terms & Conditions</p>
     </footer>
 
 </body>
 </html>
+        
