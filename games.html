@@ -3,69 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Micron App</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+    <title>Micron Games</title>
+    <style>
+        :root {
+            --micron-blue: #3498db;
+            --sky-blue-light: #e3f2fd;
+            --text-dark: #333;
+            --header-height: 60px;
+            --footer-height: 65px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            /* White to Skyblue mixture background */
+            background: linear-gradient(180deg, #FFFFFF 0%, var(--sky-blue-light) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding-top: var(--header-height);
+            padding-bottom: var(--footer-height);
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: var(--header-height);
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .menu-icon { font-size: 24px; cursor: pointer; color: #555; }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 22px;
+            color: var(--micron-blue);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .user-profile {
+            background-color: var(--micron-blue);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* --- CONTENT --- */
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .search-container {
+            margin-bottom: 25px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            outline: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        /* --- GAMES GRID --- */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            text-align: center;
+            padding-bottom: 12px;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .game-thumb {
+            width: 100%;
+            height: 120px;
+            background-color: #eee;
+            object-fit: cover;
+        }
+
+        .game-info {
+            padding: 10px;
+        }
+
+        .game-name {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .play-btn {
+            background-color: #ff8c00; /* Vibrant Orange for action */
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: var(--footer-height);
+            background-color: #FFFFFF;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #eee;
+            z-index: 1000;
+        }
+
+        .footer-icon {
+            text-align: center;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .footer-icon.active {
+            color: var(--micron-blue);
+        }
+
+        .add-btn {
+            background-color: var(--micron-blue);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-top: -30px;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+        }
+    </style>
 </head>
 <body>
 
-    <header class="header">
+    <header>
         <div class="menu-icon">☰</div>
-        <div class="logo">MICRON</div>
+        <div class="logo">Micron</div>
         <div class="user-profile">US</div>
     </header>
 
-    <main id="app-content">
-        <section id="dashboard" class="page active">
-            <div class="grid-container">
-                <div class="card"><i class="icon-blue">📖</i><p>Courses</p></div>
-                <div class="card clickable" onclick="showGames()">
-                    <i class="icon-orange">🎮</i><p>Games</p>
-                </div>
-                <div class="card"><i class="icon-purple">✏️</i><p>AI Resume</p></div>
-                <div class="card"><i class="icon-green">🧭</i><p>Career Guide</p></div>
-            </div>
-        </section>
+    <div class="container">
+        <h2 class="page-title">Best Games</h2>
+        
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search 50+ games for mind sharpening...">
+        </div>
 
-        <section id="games-page" class="page hidden">
-            <div class="games-header">
-                <h2>Best Games</h2>
-                <input type="text" placeholder="Search Games..." class="search-bar">
+        <div class="games-grid">
+            <div class="game-card">
+                <img src="https://via.placeholder.com/150x120/FF6B6B/FFFFFF?text=Puzzle" alt="Game" class="game-thumb">
+                <div class="game-info">
+                    <div class="game-name">Candy Match</div>
+                    <button class="play-btn">Play</button>
+                </div>
             </div>
-            <div class="games-grid">
-                <div class="game-card">
-                    <span class="badge">HOT</span>
-                    <img src="https://via.placeholder.com/150x100" alt="Game">
-                    <div class="game-info">
-                        <h3>Sudoku</h3>
-                        <p>Mind Sharpening</p>
-                        <div class="rating">⭐ 4.8</div>
-                        <button class="play-btn">Play</button>
-                    </div>
-                </div>
-                </div>
-        </section>
-    </main>
 
-    <footer class="footer">
-        <nav>
-            <div class="nav-item active" onclick="showDashboard()">🏠</div>
-            <div class="nav-item">🔍</div>
-            <div class="nav-item plus-btn">+</div>
-            <div class="nav-item">🔔</div>
-            <div class="nav-item">👤</div>
-        </nav>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/150x120/4ECDC4/FFFFFF?text=Cards" alt="Game" class="game-thumb">
+                <div class="game-info">
+                    <div class="game-name">Solitaire King</div>
+                    <button class="play-btn">Play</button>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="https://via.placeholder.com/150x120/45B7D1/FFFFFF?text=Brain" alt="Game" class="game-thumb">
+                <div class="game-info">
+                    <div class="game-name">Word Search</div>
+                    <button class="play-btn">Play</button>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="https://via.placeholder.com/150x120/F7B731/FFFFFF?text=Race" alt="Game" class="game-thumb">
+                <div class="game-info">
+                    <div class="game-name">Car Racing</div>
+                    <button class="play-btn">Play</button>
+                </div>
+            </div>
+            
+            </div>
+    </div>
+
+    <footer>
+        <div class="footer-icon">🏠</div>
+        <div class="footer-icon">🔍</div>
+        <div class="add-btn">+</div>
+        <div class="footer-icon">🔔</div>
+        <div class="footer-icon">👤</div>
     </footer>
 
-    <script>
-        function showGames() {
-            document.getElementById('dashboard').classList.add('hidden');
-            document.getElementById('games-page').classList.remove('hidden');
-        }
-        function showDashboard() {
-            document.getElementById('games-page').classList.add('hidden');
-            document.getElementById('dashboard').classList.remove('hidden');
-        }
-    </script>
 </body>
 </html>
