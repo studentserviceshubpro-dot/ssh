@@ -267,9 +267,63 @@
         </div>
     </div>
 
-    <div class="chat-float">
-        <i class="fas fa-comment-dots"></i>
+    <div class="chat-container">
+    <div class="chat-bubble">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
     </div>
+</div>
+
+<style>
+    /* --- Skill India Style Chat Icon --- */
+    .chat-container {
+        position: fixed;
+        bottom: 85px; /* Positioned above the footer */
+        right: 20px;
+        z-index: 9999;
+    }
+
+    .chat-bubble {
+        width: 60px;
+        height: 60px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        border: 1px solid #f0f0f0;
+        position: relative;
+    }
+
+    /* Small tail of the bubble to match the image style */
+    .chat-bubble::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        right: 5px;
+        width: 15px;
+        height: 15px;
+        background: white;
+        border-right: 1px solid #f0f0f0;
+        border-bottom: 1px solid #f0f0f0;
+        transform: rotate(45deg);
+        border-radius: 2px;
+    }
+
+    .chat-bubble:active {
+        transform: scale(0.9);
+    }
+
+    .chat-bubble svg {
+        position: relative;
+        z-index: 2;
+    }
+</style>
+
 
     <footer>
         <p>©2026 Micron | All Rights Reserved</p>
