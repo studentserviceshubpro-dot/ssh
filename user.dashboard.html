@@ -3,132 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <title>Micron Home - 2026</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            background: linear-gradient(to bottom, #e0f2fe, #ffffff);
-            min-height: 100vh;
+        :root {
+            --sky-blue: #e0f2fe;
+            --deep-blue: #0ea5e9;
+            --white: #ffffff;
+            --text-dark: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .flash-news-scroll {
+
+        body {
+            background: linear-gradient(135deg, var(--sky-blue) 0%, var(--white) 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-up {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--white);
+            padding: 15px 5%;
             display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .flash-news-scroll::-webkit-scrollbar { display: none; }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+
+        .logo {
+            font-weight: bold;
+            font-size: 24px;
+            color: var(--deep-blue);
         }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .profile-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* --- Flash News Scroll --- */
+        .flash-news {
+            width: 90%;
+            margin: 20px auto;
+            height: 150px;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .news-slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            animation: slide 12s infinite;
+        }
+
+        .slide {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            33% { transform: translateX(-100%); }
+            66% { transform: translateX(-200%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* --- Stats Container --- */
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 20px;
+            margin: 20px 5%;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .stat-item { text-align: center; }
+        .stat-item h3 { color: var(--deep-blue); }
+
+        /* --- Main Action Buttons --- */
+        .main-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 0 5%;
+            margin-bottom: 25px;
+        }
+
+        .btn-large {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .btn-large:hover { transform: scale(1.05); background: var(--deep-blue); color: white; }
+
+        /* --- Small Buttons Grid --- */
+        .small-btns-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 0 5%;
+            margin-bottom: 50px;
+        }
+
+        .small-btn {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--white);
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-links { margin-top: 10px; }
+        .footer-links a { margin: 0 10px; text-decoration: none; color: gray; }
+
+        .welcome { padding: 20px 5%; font-size: 22px; }
+
     </style>
 </head>
 <body>
 
-    <header class="bg-white shadow-md p-4 flex justify-between items-center sticky top-0 z-50 animate__animated animate__fadeInDown">
-     <div class="w-1/3 flex justify-start">
-        <button class="text-gray-600 text-xl hover:text-sky-500 transition-colors">
-            <i class="fas fa-bars"></i>
-        </button>
-     </div>
-
-     <div class="w-1/3 flex justify-center">
-        <img src="IMG_20260414_113028.jpg" 
-             alt="Logo" 
-             class="h-10 w-auto">
-     </div>
-
-     <div class="w-1/3 flex justify-end">
-        <div class="animate__animated animate__bounceIn">
-            <img src="https://ui-avatars.com/api/?name=User&background=0ea5e9&color=fff" 
-                 alt="Profile" 
-                 class="h-10 w-10 rounded-full border-2 border-sky-500 cursor-pointer">
+    <header>
+        <i class="fas fa-bars profile-icon"></i>
+        <div class="logo">MICRON</div>
+        <div class="header-icons">
+            <i class="fas fa-user-circle profile-icon"></i>
         </div>
-     </div>
-
     </header>
 
+    <div class="animate-up">
+        <h2 class="welcome">Welcome back, User! 👋</h2>
 
-    <main class="p-4 pb-24">
-        <section class="mt-4 animate__animated animate__fadeInLeft">
-            <h1 class="text-2xl font-bold text-gray-800">Welcome back, <span class="text-sky-600">Alex!</span> 👋</h1>
-            <p class="text-gray-500 text-sm">Ready to level up your skills today?</p>
-        </section>
-
-        <section class="mt-6 animate__animated animate__zoomIn">
-            <div class="flash-news-scroll gap-4">
-                <div class="min-w-[300px] h-40 bg-sky-500 rounded-2xl relative overflow-hidden flex-shrink-0 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400" class="w-full h-full object-cover opacity-50">
-                    <div class="absolute bottom-3 left-3 text-white font-bold">New AI Course Launched!</div>
-                </div>
-                <div class="min-w-[300px] h-40 bg-indigo-500 rounded-2xl relative overflow-hidden flex-shrink-0 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=400" class="w-full h-full object-cover opacity-50">
-                    <div class="absolute bottom-3 left-3 text-white font-bold">Cybersecurity Workshop LIVE</div>
-                </div>
+        <div class="flash-news">
+            <div class="news-slider">
+                <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80')">New AI Courses Launched</div>
+                <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80')">Hiring Event: Tech 2026</div>
+                <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80')">Cybersecurity Challenge Open</div>
             </div>
-        </section>
-
-        <section class="mt-8 grid grid-cols-3 gap-3 animate__animated animate__fadeInUp">
-            <div class="bg-white p-3 rounded-xl shadow-sm text-center border-b-4 border-sky-400">
-                <p class="text-xs text-gray-500">Accepted Courses</p>
-                <p class="font-bold text-lg">12</p>
-            </div>
-            <div class="bg-white p-3 rounded-xl shadow-sm text-center border-b-4 border-green-400">
-                <p class="text-xs text-gray-500">Earnings</p>
-                <p class="font-bold text-lg">₹450</p>
-            </div>
-            <div class="bg-white p-3 rounded-xl shadow-sm text-center border-b-4 border-purple-400">
-                <p class="text-xs text-gray-500">Certificates</p>
-                <p class="font-bold text-lg">05</p>
-            </div>
-        </section>
-
-        <section class="mt-8 grid grid-cols-2 gap-4 animate__animated animate__fadeIn">
-            <button class="flex flex-col items-center justify-center p-6 bg-white rounded-2xl shadow-sm hover:bg-sky-50 transition-colors">
-                <i class="fas fa-book-open text-3xl text-sky-500 mb-2"></i>
-                <span class="font-semibold text-gray-700">Courses</span>
-            </button>
-            <a href="games.html" class="flex flex-col items-center justify-center p-6 bg-white rounded-2xl shadow-sm hover:bg-sky-50 transition-colors">
-            <i class="fas fa-gamepad text-3xl text-orange-500 mb-2"></i>
-            <span class="font-semibold text-gray-700">Games</span>
-            </a>
-            <a href="ai.resume.html" class="flex flex-col items-center justify-center p-6 bg-white rounded-2xl shadow-sm hover:bg-sky-50 transition-colors">
-            <i class="fas fa-magic text-3xl text-purple-500 mb-2"></i>
-            <span class="font-semibold text-gray-700 text-center">AI Resume</span>
-            </a>
-            <a href="career.guide.html" class="flex flex-col items-center justify-center p-6 bg-white rounded-2xl shadow-sm hover:bg-sky-50 transition-colors">
-            <i class="fas fa-compass text-3xl text-green-500 mb-2"></i>
-            <span class="font-semibold text-gray-700 text-center">Career Guide</span>
-            </a>
-
-        </section>
-
-        <section class="mt-8 grid grid-cols-4 gap-4 pb-10 animate__animated animate__fadeInUp">
-            <div class="flex flex-col items-center"><i class="fas fa-list text-gray-600 bg-white p-3 rounded-full shadow-sm mb-1"></i><span class="text-[10px]">Playlist</span></div>
-            <div class="flex flex-col items-center"><i class="fas fa-play text-gray-600 bg-white p-3 rounded-full shadow-sm mb-1"></i><span class="text-[10px]">Videos</span></div>
-            <div class="flex flex-col items-center"><i class="fas fa-wallet text-gray-600 bg-white p-3 rounded-full shadow-sm mb-1"></i><span class="text-[10px]">Wallet</span></div>
-            <div class="flex flex-col items-center"><i class="fas fa-share-alt text-gray-600 bg-white p-3 rounded-full shadow-sm mb-1"></i><span class="text-[10px]">Refer</span></div>
-            <div class="flex flex-col items-center"><i class="fas fa-tag text-gray-600 bg-white p-3 rounded-full shadow-sm mb-1"></i><span class="text-[10px]">Offers</span></div>
-            <div class="flex flex-col items-center"><i class="fas fa-trophy text-gray-600 bg-white p-3 rounded-full shadow-sm mb-1"></i><span class="text-[10px]">Rank</span></div>
-            <div class="flex flex-col items-center"><i class="fas fa-message text-gray-600 bg-white p-3 rounded-full shadow-sm mb-1"></i><span class="text-[10px]">Message</span></div>
-            <div class="flex flex-col items-center"><i class="fas fa-cog text-gray-600 bg-white p-3 rounded-full shadow-sm mb-1"></i><span class="text-[10px]">Settings</span></div>
-        </section>
-    </main>
-
-    <footer class="bg-white border-t border-gray-200 fixed bottom-0 w-full p-4 flex justify-around items-center animate__animated animate__fadeInUp">
-        <i class="fas fa-home text-sky-600 text-xl"></i>
-        <i class="fas fa-search text-gray-400 text-xl"></i>
-        <div class="bg-sky-500 p-3 rounded-full -mt-10 border-4 border-white shadow-lg text-white">
-            <i class="fas fa-plus"></i>
         </div>
-        <i class="fas fa-bell text-gray-400 text-xl"></i>
-        <i class="fas fa-user text-gray-400 text-xl"></i>
+
+        <div class="stats-container">
+            <div class="stat-item"><h3>12</h3><p>Courses accepted</p></div>
+            <div class="stat-item"><h3>₹450</h3><p>Earnings</p></div>
+            <div class="stat-item"><h3>5</h3><p>Certificates</p></div>
+        </div>
+
+        <div class="main-btns">
+            <a href="#" class="btn-large">📘 Courses</a>
+            <a href="games.html" class="btn-large">🎮 Games</a>
+            <a href="ai.resume.html" class="btn-large">📄 AI Resume</a>
+            <a href="guidance.html" class="btn-large">🚀 Guidance</a>
+        </div>
+
+        <div class="small-btns-grid">
+            <div class="small-btn"><i class="fas fa-play"></i><br>Playlist</div>
+            <div class="small-btn"><i class="fas fa-video"></i><br>Videos</div>
+            <div class="small-btn"><i class="fas fa-wallet"></i><br>Wallet</div>
+            <div class="small-btn"><i class="fas fa-users"></i><br>Refer</div>
+            <div class="small-btn"><i class="fas fa-tag"></i><br>Offers</div>
+            <div class="small-btn"><i class="fas fa-trophy"></i><br>Rank</div>
+            <div class="small-btn"><i class="fas fa-cog"></i><br>Settings</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>©2026 Micron | All Rights Reserved</p>
+        <div class="footer-links">
+            <a href="#">Privacy & Policy</a> | <a href="#">Terms & Conditions</a>
+        </div>
     </footer>
 
 </body>
 </html>
-
