@@ -226,12 +226,69 @@
     <div class="animate-section">
         <h2 class="welcome">Welcome back! 👋</h2>
 
-        <div class="flash-news">
-            <div class="news-slider">
-                <div class="slide" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500')">Event: Tech 2026</div>
-                <div class="slide" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500')">Cybersecurity Hub</div>
-                <div class="slide" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500')">New Earnings Portal</div>
-            </div>
+        <div class="flash-news-container">
+    <div class="news-track">
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500')">Event: Tech 2026</div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500')">Cybersecurity Hub</div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500')">New AI Training</div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500')">Event: Tech 2026</div>
+    </div>
+</div>
+
+<style>
+    .flash-news-container {
+        width: 92%;
+        margin: 15px auto;
+        height: 160px;
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .news-track {
+        display: flex;
+        width: 400%; /* 4 slides total (3 original + 1 duplicate) */
+        height: 100%;
+        animation: infiniteScroll 12s linear infinite;
+    }
+
+    .slide {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        padding: 20px;
+        background-size: cover;
+        background-position: center;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+
+    /* Seamless Loop Animation */
+    @keyframes infiniteScroll {
+        0% {
+            transform: translateX(0);
+        }
+        /* Each 25% represents one slide */
+        20% { transform: translateX(0); }       /* Pause on Slide 1 */
+        25% { transform: translateX(-100%); }  /* Move to Slide 2 */
+        45% { transform: translateX(-100%); }  /* Pause on Slide 2 */
+        50% { transform: translateX(-200%); }  /* Move to Slide 3 */
+        70% { transform: translateX(-200%); }  /* Pause on Slide 3 */
+        75% { transform: translateX(-300%); }  /* Move to Duplicate of Slide 1 */
+        95% { transform: translateX(-300%); }  /* Pause on Duplicate */
+        100% { transform: translateX(-300%); } /* Instantly resets to 0% */
+    }
+
+    /* Optional: Pause scrolling when user touches/hovers */
+    .flash-news-container:hover .news-track {
+        animation-play-state: paused;
+    }
+</style>
+
         </div>
 
         <div class="stats-grid">
