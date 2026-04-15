@@ -3,130 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Professional Page</title>
-    <style>
-        /* Basic Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f4f7f6;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Navigation */
-        nav {
-            background: #2c3e50;
-            color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 20px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 400px;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .btn {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-top: 20px;
-            transition: background 0.3s;
-        }
-
-        .btn:hover {
-            background: #2980b9;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #777;
-        }
-    </style>
+    <title>Micron App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">BrandName</div>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
-
-    <header class="hero">
-        <h1>Welcome to My Website</h1>
-        <p>Creating digital experiences with clean code and modern design.</p>
-        <a href="#learn-more" class="btn">Get Started</a>
+    <header class="header">
+        <div class="menu-icon">☰</div>
+        <div class="logo">MICRON</div>
+        <div class="user-profile">US</div>
     </header>
 
-    <main class="container" id="learn-more">
-        <h2>About This Project</h2>
-        <p>This is a standard HTML5 template. It uses <strong>Semantic HTML</strong> (like <code>&lt;nav&gt;</code>, <code>&lt;header&gt;</code>, and <code>&lt;main&gt;</code>) to ensure better SEO and accessibility.</p>
-        
-        <p style="margin-top: 15px;">The CSS is embedded in the head for convenience, but for larger projects, you should link an external stylesheet.</p>
+    <main id="app-content">
+        <section id="dashboard" class="page active">
+            <div class="grid-container">
+                <div class="card"><i class="icon-blue">📖</i><p>Courses</p></div>
+                <div class="card clickable" onclick="showGames()">
+                    <i class="icon-orange">🎮</i><p>Games</p>
+                </div>
+                <div class="card"><i class="icon-purple">✏️</i><p>AI Resume</p></div>
+                <div class="card"><i class="icon-green">🧭</i><p>Career Guide</p></div>
+            </div>
+        </section>
+
+        <section id="games-page" class="page hidden">
+            <div class="games-header">
+                <h2>Best Games</h2>
+                <input type="text" placeholder="Search Games..." class="search-bar">
+            </div>
+            <div class="games-grid">
+                <div class="game-card">
+                    <span class="badge">HOT</span>
+                    <img src="https://via.placeholder.com/150x100" alt="Game">
+                    <div class="game-info">
+                        <h3>Sudoku</h3>
+                        <p>Mind Sharpening</p>
+                        <div class="rating">⭐ 4.8</div>
+                        <button class="play-btn">Play</button>
+                    </div>
+                </div>
+                </div>
+        </section>
     </main>
 
-    <footer>
-        &copy; 2026 BrandName. All rights reserved.
+    <footer class="footer">
+        <nav>
+            <div class="nav-item active" onclick="showDashboard()">🏠</div>
+            <div class="nav-item">🔍</div>
+            <div class="nav-item plus-btn">+</div>
+            <div class="nav-item">🔔</div>
+            <div class="nav-item">👤</div>
+        </nav>
     </footer>
 
+    <script>
+        function showGames() {
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('games-page').classList.remove('hidden');
+        }
+        function showDashboard() {
+            document.getElementById('games-page').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+        }
+    </script>
 </body>
 </html>
-
