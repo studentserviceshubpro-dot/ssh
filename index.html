@@ -182,6 +182,103 @@
             closeModal('signupModal');
         }
     </script>
+    <script>
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxcp8NyBevQurWdPpap0KQtZxMZtyrg5YGH7rNinz_--PSNucORbIVIBev6nd661-C6/exec"; // Paste your Apps Script URL here
+
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    if (menu.style.display === 'flex') {
+      menu.classList.add('animate__fadeOutUp');
+      setTimeout(() => {
+        menu.style.display = 'none';
+        menu.classList.remove('animate__fadeOutUp');
+      }, 400);
+    } else {
+      menu.style.display = 'flex';
+      menu.classList.add('animate__fadeInDown');
+    }
+  }
+
+  function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+  async function handleSignup() {
+    const fullName = document.querySelectorAll('#signupModal input')[0].value;
+    const dateOfBirth = document.querySelectorAll('#signupModal input')[1].value;
+    const email = document.querySelectorAll('#signupModal input')[2].value;
+    const contact = document.querySelectorAll('#signupModal input')[3].value;
+    const referralCode = document.querySelectorAll('#signupModal input')[4].value;
+    const password = document.querySelectorAll('#signupModal input')[5].value;
+
+    if (!fullName || !email || !password || !contact) {
+      alert('Please fill all required fields');
+      return;
+    }
+
+    try {
+      const response = await fetch(APPS_SCRIPT_URL + '?action=signup', {
+        method: 'POST',
+        body: JSON.stringify({
+          fullName,
+          dateOfBirth,
+          email,
+          contact,
+          referralCode,
+          password
+        })
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        alert('✓ ' + result.message);
+        closeModal('signupModal');
+        // Clear inputs
+        document.querySelectorAll('#signupModal input').forEach(input => input.value = '');
+      } else {
+        alert('✗ ' + result.message);
+      }
+    } catch (error) {
+      alert('Error: ' + error.message);
+    }
+  }
+
+  async function handleLogin() {
+    const email = document.querySelector('#user input[type="text"]').value;
+    const password = document.querySelector('#user input[type="password"]').value;
+
+    if (!email || !password) {
+      alert('Please enter email and password');
+      return;
+    }
+
+    try {
+      const response = await fetch(APPS_SCRIPT_URL + '?action=login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert('Welcome, ' + result.user.fullName);
+        localStorage.setItem('user', JSON.stringify(result.user));
+        window.location.href = 'user.dashboard.html';
+      } else {
+        alert('✗ ' + result.message);
+      }
+    } catch (error) {
+      alert('Error: ' + error.message);
+    }
+  }
+    </script>
 </body>
-                </html>
+                
                 
